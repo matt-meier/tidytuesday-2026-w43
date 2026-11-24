@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IKEA Global Seating Price Index | TidyTuesday 2026 Week 43</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="src/styles.css" />
+</head>
+<body>
+  <main class="catalogue-page" aria-label="IKEA 50-Country Seating Price Index Editorial Infographic">
+    <div class="page-content">
+      <!-- Editorial Masthead -->
+      <header class="masthead">
+        <h1 class="headline">Same IKEA Sofa, More Than Double the Price</h1>
+        <p class="subtitle">
+          Median USD price gap across 224 identical IKEA seating SKUs in 50 countries (28 Sept 2026).
+          <strong class="accent-above">Mexico (+64.5%)</strong> costs 2.2x
+          <strong class="accent-below">Thailand (-25.4%)</strong>.
+        </p>
+
+        <div class="controls-strip" role="region" aria-label="Legend and region spotlight controls">
+          <div class="inline-legend" aria-label="Color key">
+            <span class="legend-item">
+              <span class="swatch swatch-above" aria-hidden="true"></span>
+              <span>Above global median</span>
+            </span>
+            <span class="legend-item">
+              <span class="swatch swatch-below" aria-hidden="true"></span>
+              <span>Below global median</span>
+            </span>
+            <span class="legend-item">
+              <span class="swatch swatch-sweden" aria-hidden="true"></span>
+              <span>Sweden baseline</span>
+            </span>
+          </div>
+
+          <div class="controls-right">
+            <div class="region-pills" role="group" aria-label="Highlight region">
+              <button type="button" class="pill is-active" data-region="ALL" aria-pressed="true">All 50</button>
+              <button type="button" class="pill" data-region="Americas" aria-pressed="false">Americas</button>
+              <button type="button" class="pill" data-region="Europe" aria-pressed="false">Europe</button>
+              <button type="button" class="pill" data-region="Middle East & Africa" aria-pressed="false">MEA</button>
+              <button type="button" class="pill" data-region="Asia-Pacific" aria-pressed="false">Asia-Pacific</button>
+            </div>
+            <label class="iqr-toggle" title="Show each country's 25th to 75th percentile SKU spread">
+              <input type="checkbox" id="iqrToggle" />
+              <span>SKU spread</span>
+            </label>
+          </div>
+        </div>
+      </header>
+
+      <hr class="hairline" />
+
+      <!-- Status / Loading State -->
+      <div id="statusBanner" class="status-banner" role="status" aria-live="polite">
+        Loading 50-country IKEA price index...
+      </div>
+
+      <!-- Centerpiece 50-Country Diverging Bar Chart -->
+      <section class="chart-stage" aria-label="50-country IKEA seating price index chart">
+        <div class="chart-frame">
+          <svg
+            id="indexChart"
+            class="index-svg"
+            viewBox="0 0 778 708"
+            role="img"
+            aria-labelledby="chartTitle chartDesc"
+          >
+            <title id="chartTitle">IKEA Seating Price Index Across 50 Countries</title>
+            <desc id="chartDesc">
+              Horizontal diverging bar chart ranking 50 IKEA markets from Mexico at +64.5% above the global median down to Thailand at -25.4% below the global median.
+            </desc>
+          </svg>
+
+          <!-- Upper-left methodology note strictly inside verified empty whitespace -->
+          <aside class="method-note" aria-label="Methodology note">
+            <p class="note-kicker">HOW THE INDEX WORKS</p>
+            <p class="note-body">
+              Each bar shows a market's median percentage gap versus the global USD median across
+              <strong>224 shared seating SKUs</strong> sold in at least 20 countries. US list prices exclude sales tax.
+              Hover or click any country to inspect its basket.
+            </p>
+          </aside>
+
+          <!-- Lower-right editorial callouts strictly inside verified empty whitespace on desktop; stacked cleanly on mobile -->
+          <div class="callouts-layer" aria-label="Key editorial findings">
+            <article class="callout-card callout-americas" data-highlight="MX,US,CA" tabindex="0" role="button" aria-label="Highlight North American markets on chart">
+              <p class="callout-text">
+                <strong>North American divide:</strong> US shoppers (+28.5%, #6) pay 35% more than Canada (-4.8%, #36), while Mexico (+64.5%) leads all 50 markets.
+              </p>
+            </article>
+
+            <article class="callout-card callout-sweden" data-highlight="SE,DE,AT" tabindex="0" role="button" aria-label="Highlight Sweden and European baseline markets on chart">
+              <p class="callout-text">
+                <strong>Home-market baseline:</strong> Sweden (-0.8%, #26) lands at the global midpoint alongside Germany (-1.5%) and Austria (0.0%).
+              </p>
+            </article>
+
+            <article class="callout-card callout-apac" data-highlight="TH,JP,PH,KR,MY,IN,NZ,AU,SG" tabindex="0" role="button" aria-label="Highlight Asia-Pacific markets on chart">
+              <p class="callout-text">
+                <strong>Asia-Pacific sweep:</strong> All 9 Asia-Pacific markets sit below the median, claiming the 5 lowest spots worldwide.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <hr class="hairline hairline-bottom" />
+
+      <!-- Bottom Single-Product IKEA Price Tag Proof -->
+      <section class="price-proof" aria-label="KLIPPAN 2-seat sofa global price comparison">
+        <div class="proof-header">
+          <h2 class="proof-title">PRICE TAG PROOF: KLIPPAN 2-SEAT SOFA (ITEM 403.993.14)</h2>
+          <span id="proofCompare" class="proof-meta">49 markets · Global median $413</span>
+        </div>
+
+        <div id="priceTagGrid" class="price-tag-grid" role="list">
+          <!-- Populated cleanly from data.json -->
+        </div>
+      </section>
+    </div>
+
+    <!-- Branded Personal Footer -->
+    <footer class="branded-footer" aria-label="Attribution and data sources">
+      <div class="footer-icons">
+        <a
+          href="https://www.linkedin.com/in/meier2k8/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-icon-link"
+          aria-label="Matt Meier on LinkedIn"
+        >
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M8.34 17.34V10.17H6.01V17.34H8.34M7.18 9.21C7.92 9.21 8.53 8.6 8.53 7.85C8.53 7.1 7.92 6.5 7.18 6.5C6.43 6.5 5.83 7.1 5.83 7.85C5.83 8.6 6.43 9.21 7.18 9.21M18 17.34V13.4C18 11.47 17.58 9.99 15.32 9.99C14.23 9.99 13.5 10.59 13.2 11.16H13.17V10.17H10.94V17.34H13.27V13.79C13.27 12.85 13.45 11.94 14.61 11.94C15.75 11.94 15.77 13.01 15.77 13.85V17.34H18Z" />
+          </svg>
+        </a>
+        <a
+          href="https://public.tableau.com/app/profile/matt5450/vizzes"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-icon-link"
+          aria-label="Matt Meier on Tableau Public"
+        >
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <path d="M11.2 1.5h1.6v2.7h2.7v1.6h-2.7v2.7h-1.6V5.8H8.5V4.2h2.7V1.5zm0 14h1.6v2.7h2.7v1.6h-2.7v2.7h-1.6v-2.7H8.5v-1.6h2.7v-2.7zM4.2 8.5h1.6v2.7h2.7v1.6H5.8v2.7H4.2v-2.7H1.5v-1.6h2.7V8.5zm14 0h1.6v2.7h2.7v1.6h-2.7v2.7h-1.6v-2.7h-2.7v-1.6h2.7V8.5zm-7-1h1.6v3.7h3.7v1.6h-3.7v3.7h-1.6v-3.7H7.5v-1.6h3.7V7.5zM5.6 3.5h1.1v1.8h1.8v1.1H6.7v1.8H5.6V6.4H3.8V5.3h1.8V3.5zm11.7 0h1.1v1.8h1.8v1.1h-1.8v1.8h-1.1V6.4h-1.8V5.3h1.8V3.5zM5.6 15.8h1.1v1.8h1.8v1.1H6.7v1.8H5.6v-1.8H3.8v-1.1h1.8v-1.8zm11.7 0h1.1v1.8h1.8v1.1h-1.8v1.8h-1.1v-1.8h-1.8v-1.1h1.8v-1.8z" />
+          </svg>
+        </a>
+      </div>
+      <div class="footer-text">
+        CREATED BY MATT MEIER &nbsp;|&nbsp; #TIDYTUESDAY 2026 WEEK 43 &nbsp;|&nbsp; SOURCE: IKEA.COM &amp; FAWAZAHMED0 CURRENCY API
+      </div>
+    </footer>
+  </main>
+
+  <!-- Floating Narrative Tooltip -->
+  <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+
+  <script src="src/app.js"></script>
+</body>
+</html>
